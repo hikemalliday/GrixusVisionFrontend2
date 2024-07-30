@@ -11,4 +11,4 @@ Now that this repo 'works' locally, Im going to rebuild the backend in Django, t
 
 DEV NOTES:
 
-`useItems` is basically just an instance of `useQuery` (wrapper is for using a custom axios instance). But note that the `queryKey` for `useItems.useQuery` is state: itemName, charName, page, pageSize. This allows us to just set these states and auto-refetch / re-render on the spot.
+`useItems` is basically just an instance of `useQuery` (wrapper is for using a custom axios instance). But note that the `queryKey` for `useItems.useQuery` is states: itemName, charName, page, pageSize. This allows us to just set these states and auto-refetch / re-render on the spot.
