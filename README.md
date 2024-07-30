@@ -8,3 +8,7 @@ I did fairly well on not looking at past projects for the most part (forced me t
 This version is not live, unlike [GrixusVisionFrontend](https://github.com/hikemalliday/GrixusVisionFrontend). 
 
 Now that this repo 'works' locally, Im going to rebuild the backend in Django, to force myself to better understand that tech.
+
+DEV NOTES:
+
+`useItems` is basically just an instance of `useQuery` (wrapper is for using a custom axios instance). But note that the `queryKey` for `useItems.useQuery` is state: itemName, charName, page, pageSize. This allows us to just set these states and auto-refetch / re-render on the spot.
