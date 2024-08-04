@@ -7,7 +7,15 @@ export const MainPage = () => {
     <>
       <Header />
       <PaginationController />
-      <ItemsView />
+      <ItemsView
+        columns={[
+          "char_name",
+          "item_name",
+          "item_location",
+          "item_count",
+          "char_guild",
+        ]}
+      />
     </>
   );
 };

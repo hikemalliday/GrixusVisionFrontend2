@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError, AxiosInstance } from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 
 export const useAxios = (
   baseURL: string,
@@ -8,7 +8,8 @@ export const useAxios = (
 ): AxiosInstance => {
   const navigate = useNavigate();
   const axiosInstance = axios.create({ baseURL, withCredentials: true });
-  const { accessToken, setAccessToken, refreshToken, clear } = useAuth();
+  const { accessToken, setAccessToken, refreshToken, clear } = useAuthContext();
+
   if (!enableInterceptors) {
     return axiosInstance;
   }
@@ -31,16 +32,17 @@ export const useAxios = (
     },
     async (error) => {
       const err = error as AxiosError;
-      const originalRequest = error.request;
-      if (err.code === "ERR_NETWORK" && !originalRequest._retry) {
+      const originalRequest = error.config;
+      // @ts-ignore
+      if (err.response.status === 401 && !originalRequest._retry) {
         try {
           originalRequest._retry = true;
-          const { data } = await axios.post("/refresh", {
-            refresh_token: refreshToken,
+          const { data } = await axiosInstance.post("/token/refresh/", {
+            refresh: refreshToken,
           });
           if (data !== undefined) {
-            setAccessToken(data.access_token);
-            originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
+            setAccessToken(data.access);
+            originalRequest.headers.Authorization = `Bearer ${data.access}`;
             // Clear params, else it appends duplicate query params
             originalRequest.params = {};
             return axiosInstance(originalRequest);

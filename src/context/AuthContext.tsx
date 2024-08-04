@@ -24,8 +24,8 @@ interface AuthProviderProps {
 }
 
 interface ITokens {
-  access_token: string;
-  refresh_token: string;
+  access: string;
+  refresh: string;
 }
 
 const AuthContext = createContext<IAuthProviderValues | undefined>(undefined);
@@ -38,8 +38,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     useLocalStorage();
 
   const login = (tokens: ITokens) => {
-    const accessToken = tokens["access_token"];
-    const refreshToken = tokens["refresh_token"];
+    const accessToken = tokens["access"];
+    const refreshToken = tokens["refresh"];
     setAccessToken(accessToken ?? "");
     setRefreshToken(refreshToken ?? "");
     setAuthUser({ accessToken, refreshToken });
@@ -76,7 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );
 };
 
-export const useAuth = () => {
+export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");

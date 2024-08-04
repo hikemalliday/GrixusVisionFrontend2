@@ -20,7 +20,7 @@ const PaginationContext = createContext<IPaginationContextValues | undefined>(
 export const PaginationProvider: React.FC<PaginationProviderProps> = ({
   children,
 }) => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
   const [count, setCount] = useState(0);
 

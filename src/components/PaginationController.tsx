@@ -10,20 +10,20 @@ export const PaginationController = ({}) => {
   return (
     <div className="pagination-controller-container">
       <div className="pagination-metadata">
-        {`page: ${String(page + 1)}, pageSize: ${pageSize}`}
+        {`page: ${String(page)}, pageSize: ${pageSize}`}
         {`Count: ${count}`}
       </div>
       <Button
         onClick={handlePageChange(-1)}
         variant="outlined"
-        disabled={page <= 0}
+        disabled={page <= 1}
       >
         LEFT
       </Button>
       <Button
         onClick={handlePageChange(1)}
         variant="outlined"
-        disabled={(page + 1) * pageSize > count}
+        disabled={page * pageSize > count}
       >
         RIGHT
       </Button>

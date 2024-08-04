@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ItemAndCharacterProvider } from "./context/ItemAndCharacterContext";
 import { PaginationProvider } from "./context/PaginationContext";
+import { SignUp } from "./components/SignUp";
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function App() {
                   <Route index={true} element={<MainPage />} />
                 </Route>
                 <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
               </Routes>
             </PaginationProvider>
           </ItemAndCharacterProvider>

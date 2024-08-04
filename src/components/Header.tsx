@@ -59,6 +59,7 @@ export const Header = () => {
         disablePortal
         id="combo-box-demo"
         options={["ALL", ...useCharNamesData]}
+        // options={["ALL"]}
         sx={{ width: 300 }}
         renderInput={(params) => (
           <TextField

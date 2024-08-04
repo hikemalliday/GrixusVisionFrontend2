@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 import { usePaginationContext } from "../context/PaginationContext";
 import { useItems } from "../hooks/requests";
+import "../App.css";
 
 export interface IItemsViewProps {
   columns?: string[];
@@ -61,7 +62,7 @@ export const ItemsView = ({ columns }: IItemsViewProps) => {
     <tbody>
       {reducedData.map((item, i) => {
         return (
-          <tr key={i}>
+          <tr key={i} className={i % 2 ? "row-even" : "row-odd"}>
             {colNames.map((col, j) => {
               return <td key={`${i}-${j}`}>{item[col] ?? ""}</td>;
             })}
@@ -73,7 +74,7 @@ export const ItemsView = ({ columns }: IItemsViewProps) => {
 
   return (
     <>
-      {count >= 0 ? "No Results" : ""}
+      {count <= 0 ? "No Results" : ""}
       <table className="items-view-container">
         {headers}
         {rows}
