@@ -1,3 +1,5 @@
+Read-only query interface for the database produced by MageloScraper2.
+
 This is a re-build of [GrixusVisionFrontend](https://github.com/hikemalliday/GrixusVisionFrontend). The purpose of the rebuild was to:
 
 - Learn `react-query`
