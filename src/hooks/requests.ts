@@ -1,5 +1,6 @@
 import { useAxios } from "./useAxios";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { API_URL } from "../config";
 
 export interface IUseLoginParams {
   username: string;
@@ -12,8 +13,6 @@ export interface IUseItemsParams {
   page: number;
   pageSize: number;
 }
-
-const API_URL = "http://127.0.0.1:8000/api/";
 
 export const useLogin = () => {
   const axiosInstance = useAxios(API_URL, false);
