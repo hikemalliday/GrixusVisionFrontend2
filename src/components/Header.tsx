@@ -3,6 +3,7 @@ import { useState, KeyboardEvent } from "react";
 import { useCharNames } from "../hooks/requests";
 import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 import { labelProps } from "./styles";
+import { usePaginationContext } from "../context/PaginationContext";
 
 export interface IHeaderProps {
   setCharName: (char: string) => void;
@@ -15,6 +16,7 @@ export const Header = () => {
   const { isLoading: isCharNamesLoading, data: useCharNamesData } =
     useCharNames();
   const { itemName, setItemName, setCharName } = useItemAndCharacterContext();
+  const { setPage } = usePaginationContext();
   // Annoying re-render workaround for now, until I understand the tech more
   // re-fetch was causing text field to clear without adding
   const [inputValue, setInputValue] = useState<string>(itemName);
@@ -22,11 +24,13 @@ export const Header = () => {
     if (event.key == "Enter") {
       event.preventDefault();
       const target = event.target as HTMLInputElement;
+      setPage(1);
       setItemName(target.value);
     }
   };
   const handleCharacterChange = (event: any, newVal: string) => {
     event.preventDefault();
+    setPage(1);
     setCharName(newVal);
   };
 
